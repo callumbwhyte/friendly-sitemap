@@ -50,6 +50,20 @@ namespace Our.Umbraco.Sitemap.Controllers
                     new XElement("lastmod", node.UpdateDate.ToString("yyyy-MM-dd"))
                 });
 
+                var changeFreqency = node.Value<string>("sitemapChangeFreq");
+
+                if (string.IsNullOrWhiteSpace(changeFreqency) == false)
+                {
+                    urlElement.Add(new XElement("changefreq", changeFreqency));
+                }
+
+                var priority = node.Value<decimal>("sitemapPriority");
+
+                if (priority > 0)
+                {
+                    urlElement.Add(new XElement("priority", changeFreqency));
+                }
+
                 root.Add(urlElement);
             }
 
