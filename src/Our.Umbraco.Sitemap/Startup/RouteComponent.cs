@@ -17,8 +17,8 @@ namespace Our.Umbraco.Sitemap.Startup
         public void Initialize()
         {
             RouteTable.Routes.MapUmbracoRoute(
-                "XML Sitemap",
-                "sitemap.xml",
+                Constants.SitemapRouteName,
+                Constants.SitemapRouteUrl,
                 new
                 {
                     controller = "Sitemap",
