@@ -6,10 +6,10 @@
     <Description></Description>
     <Authors>Callum Whyte</Authors>
     <Copyright>Copyright © 2019 Callum Whyte, and other contributors</Copyright>
-    <PackageLicenseUrl>https://github.com/callumbwhyte/umbbraco-sitemap/blob/master/LICENSE.md</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/callumbwhyte/umbbraco-sitemap</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/callumbwhyte/umbbraco-sitemap/master/docs/img/logo.png</PackageIconUrl>
-    <RepositoryUrl>https://github.com/callumbwhyte/umbbraco-sitemap</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/callumbwhyte/umbraco-sitemap/blob/master/LICENSE.md</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/callumbwhyte/umbraco-sitemap</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/callumbwhyte/umbraco-sitemap/master/docs/img/logo.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/callumbwhyte/umbraco-sitemap</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Umbraco Xml Sitemap SEO</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
