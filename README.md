@@ -1,7 +1,7 @@
-# Umbraco Sitemap
+# Umbraco Dynamic Sitemap
 
-[![NuGet release](https://img.shields.io/nuget/v/Our.Umbraco.Sitemap.svg)](https://www.nuget.org/packages/Our.Umbraco.Sitemap/)
-[![Our Umbraco project page](https://img.shields.io/badge/our-umbraco-orange.svg)](https://our.umbraco.com/projects/website-utilities/sitemap/)
+[![NuGet release](https://img.shields.io/nuget/v/Our.Umbraco.DynamicSitemap.svg)](https://www.nuget.org/packages/Our.Umbraco.DynamicSitemap/)
+[![Our Umbraco project page](https://img.shields.io/badge/our-umbraco-orange.svg)](https://our.umbraco.com/projects/website-utilities/dynamic-sitemap/)
 
 ## Getting started
 
@@ -9,17 +9,17 @@ This package is supported on Umbraco 8.1+.
 
 ### Installation
 
-Sitemap is available from Our Umbraco, NuGet, or as a manual download directly from GitHub.
+Dynamic Sitemap is available from Our Umbraco, NuGet, or as a manual download directly from GitHub.
 
 #### Our Umbraco repository
 
-You can find a downloadable package, along with a discussion forum for this package, on the [Our Umbraco](https://our.umbraco.com/projects/website-utilities/sitemap/) site.
+You can find a downloadable package, along with a discussion forum for this package, on the [Our Umbraco](https://our.umbraco.com/projects/website-utilities/dynamic-sitemap/) site.
 
 #### NuGet package repository
 
-To [install from NuGet](https://www.nuget.org/packages/Our.Umbraco.Sitemap/), run the following command in your instance of Visual Studio.
+To [install from NuGet](https://www.nuget.org/packages/Our.Umbraco.DynamicSitemap/), run the following command in your instance of Visual Studio.
 
-    PM> Install-Package Our.Umbraco.Sitemap
+    PM> Install-Package Our.Umbraco.DynamicSitemap
 
 ## Contribution guidelines
 

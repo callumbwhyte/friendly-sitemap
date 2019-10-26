@@ -2,13 +2,13 @@
 using System.Text;
 using System.Web.Mvc;
 using System.Xml.Linq;
-using Our.Umbraco.Sitemap.Configuration;
-using Our.Umbraco.Sitemap.Extensions;
+using Our.Umbraco.DynamicSitemap.Configuration;
+using Our.Umbraco.DynamicSitemap.Extensions;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 using Umbraco.Web.Mvc;
 
-namespace Our.Umbraco.Sitemap.Controllers
+namespace Our.Umbraco.DynamicSitemap.Controllers
 {
     public class SitemapController : RenderMvcController
     {

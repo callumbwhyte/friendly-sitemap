@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Our.Umbraco.Sitemap.Configuration
+namespace Our.Umbraco.DynamicSitemap.Configuration
 {
     public class SitemapConfiguration
     {
