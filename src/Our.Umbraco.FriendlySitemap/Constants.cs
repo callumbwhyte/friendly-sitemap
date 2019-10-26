@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Our.Umbraco.Sitemap
+namespace Our.Umbraco.FriendlySitemap
 {
     public class Constants
     {

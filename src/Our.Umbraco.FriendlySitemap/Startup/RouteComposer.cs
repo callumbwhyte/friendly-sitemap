@@ -1,7 +1,7 @@
 ﻿using Umbraco.Core;
 using Umbraco.Core.Composing;
 
-namespace Our.Umbraco.Sitemap.Startup
+namespace Our.Umbraco.FriendlySitemap.Startup
 {
     public class RouteComposer : IUserComposer
     {

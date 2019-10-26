@@ -6,7 +6,7 @@ using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 using Umbraco.Web.Routing;
 
-namespace Our.Umbraco.Sitemap.Helpers
+namespace Our.Umbraco.FriendlySitemap.Helpers
 {
     internal static class DomainHelper
     {

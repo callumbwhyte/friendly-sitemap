@@ -1,6 +1,6 @@
 ﻿using Umbraco.Core.Models.PublishedContent;
 
-namespace Our.Umbraco.Sitemap.Extensions
+namespace Our.Umbraco.FriendlySitemap.Extensions
 {
     public static class PublishedContentExtensions
     {

@@ -6,7 +6,7 @@ name: $(packageVersion)$(Rev:.r)
 
 variables:
   buildConfiguration: 'Release'
-  packageName: 'Our.Umbraco.Sitemap'
+  packageName: 'Our.Umbraco.FriendlySitemap'
 
 trigger: none
 
