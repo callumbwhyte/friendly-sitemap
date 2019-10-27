@@ -1,10 +1,10 @@
 ﻿using System.Web.Routing;
-using Our.Umbraco.DynamicSitemap.Helpers;
+using Our.Umbraco.FriendlySitemap.Helpers;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 using Umbraco.Web.Mvc;
 
-namespace Our.Umbraco.DynamicSitemap.Routing
+namespace Our.Umbraco.FriendlySitemap.Routing
 {
     internal class RootNodeByDomainRouteHandler : UmbracoVirtualNodeRouteHandler
     {

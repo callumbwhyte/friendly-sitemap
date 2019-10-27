@@ -1,9 +1,9 @@
 ﻿using System.Web.Routing;
-using Our.Umbraco.DynamicSitemap.Routing;
+using Our.Umbraco.FriendlySitemap.Routing;
 using Umbraco.Core.Composing;
 using Umbraco.Web;
 
-namespace Our.Umbraco.DynamicSitemap.Startup
+namespace Our.Umbraco.FriendlySitemap.Startup
 {
     internal class RouteComponet : IComponent
     {

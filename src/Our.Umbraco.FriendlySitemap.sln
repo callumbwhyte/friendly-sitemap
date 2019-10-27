@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Our.Umbraco.DynamicSitemap", "Our.Umbraco.DynamicSitemap\Our.Umbraco.DynamicSitemap.csproj", "{9E53EF5A-F256-4225-8391-44B32FE1B49A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Our.Umbraco.FriendlySitemap", "Our.Umbraco.FriendlySitemap\Our.Umbraco.FriendlySitemap.csproj", "{9E53EF5A-F256-4225-8391-44B32FE1B49A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

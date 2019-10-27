@@ -1,7 +1,7 @@
-# Umbraco Dynamic Sitemap
+# Umbraco Friendly Sitemap
 
-[![NuGet release](https://img.shields.io/nuget/v/Our.Umbraco.DynamicSitemap.svg)](https://www.nuget.org/packages/Our.Umbraco.DynamicSitemap/)
-[![Our Umbraco project page](https://img.shields.io/badge/our-umbraco-orange.svg)](https://our.umbraco.com/projects/website-utilities/dynamic-sitemap/)
+[![NuGet release](https://img.shields.io/nuget/v/Our.Umbraco.FriendlySitemap.svg)](https://www.nuget.org/packages/Our.Umbraco.FriendlySitemap/)
+[![Our Umbraco project page](https://img.shields.io/badge/our-umbraco-orange.svg)](https://our.umbraco.com/projects/website-utilities/friendly-sitemap/)
 
 ## Getting started
 
@@ -9,17 +9,17 @@ This package is supported on Umbraco 8.1+.
 
 ### Installation
 
-Dynamic Sitemap is available from Our Umbraco, NuGet, or as a manual download directly from GitHub.
+Friendly Sitemap is available from Our Umbraco, NuGet, or as a manual download directly from GitHub.
 
 #### Our Umbraco repository
 
-You can find a downloadable package, along with a discussion forum for this package, on the [Our Umbraco](https://our.umbraco.com/projects/website-utilities/dynamic-sitemap/) site.
+You can find a downloadable package, along with a discussion forum for this package, on the [Our Umbraco](https://our.umbraco.com/projects/website-utilities/friendly-sitemap/) site.
 
 #### NuGet package repository
 
-To [install from NuGet](https://www.nuget.org/packages/Our.Umbraco.DynamicSitemap/), run the following command in your instance of Visual Studio.
+To [install from NuGet](https://www.nuget.org/packages/Our.Umbraco.FriendlySitemap/), run the following command in your instance of Visual Studio.
 
-    PM> Install-Package Our.Umbraco.DynamicSitemap
+    PM> Install-Package Our.Umbraco.FriendlySitemap
 
 ## Contribution guidelines
 

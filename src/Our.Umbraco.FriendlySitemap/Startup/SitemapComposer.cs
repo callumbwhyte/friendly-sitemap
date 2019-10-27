@@ -1,8 +1,8 @@
 ﻿using System.Configuration;
-using Our.Umbraco.DynamicSitemap.Configuration;
+using Our.Umbraco.FriendlySitemap.Configuration;
 using Umbraco.Core.Composing;
 
-namespace Our.Umbraco.DynamicSitemap.Startup
+namespace Our.Umbraco.FriendlySitemap.Startup
 {
     public class SitemapComposer : IComposer
     {
