@@ -56,14 +56,14 @@ namespace Our.Umbraco.FriendlySitemap.Controllers
 
                 if (string.IsNullOrWhiteSpace(changeFreqency) == false)
                 {
-                    urlElement.Add(new XElement("changefreq", changeFreqency));
+                    urlElement.Add(new XElement("changefreq", changeFreqency.ToLower()));
                 }
 
                 var priority = node.Value<decimal>("sitemapPriority");
 
                 if (priority > 0)
                 {
-                    urlElement.Add(new XElement("priority", changeFreqency));
+                    urlElement.Add(new XElement("priority", priority));
                 }
 
                 root.Add(urlElement);
