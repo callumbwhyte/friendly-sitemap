@@ -3,11 +3,11 @@ using Umbraco.Core.Composing;
 
 namespace Our.Umbraco.FriendlySitemap.Startup
 {
-    public class RouteComposer : IUserComposer
+    public class SitemapRouteComposer : IUserComposer
     {
         public void Compose(Composition composition)
         {
-            composition.Components().Insert<RouteComponet>();
+            composition.Components().Insert<SitemapRouteComponet>();
         }
     }
 }

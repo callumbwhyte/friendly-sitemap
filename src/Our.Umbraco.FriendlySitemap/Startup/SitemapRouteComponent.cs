@@ -5,11 +5,11 @@ using Umbraco.Web;
 
 namespace Our.Umbraco.FriendlySitemap.Startup
 {
-    internal class RouteComponet : IComponent
+    internal class SitemapRouteComponet : IComponent
     {
         private readonly IUmbracoContextFactory _umbracoContextFactory;
 
-        public RouteComponet(IUmbracoContextFactory umbracoContextFactory)
+        public SitemapRouteComponet(IUmbracoContextFactory umbracoContextFactory)
         {
             _umbracoContextFactory = umbracoContextFactory;
         }
