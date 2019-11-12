@@ -4,7 +4,7 @@ using Umbraco.Core.Composing;
 
 namespace Our.Umbraco.FriendlySitemap.Startup
 {
-    public class SitemapComposer : IComposer
+    public class SitemapConfigComposer : IUserComposer
     {
         private const string Prefix = "Umbraco.Sitemap";
 
