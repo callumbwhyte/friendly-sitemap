@@ -1,15 +1,15 @@
 ﻿using System.Web.Routing;
-using Our.Umbraco.FriendlySitemap.Routing;
+using Our.Umbraco.Extensions.Routing;
 using Umbraco.Core.Composing;
 using Umbraco.Web;
 
 namespace Our.Umbraco.FriendlySitemap.Startup
 {
-    internal class SitemapRouteComponet : IComponent
+    internal class SitemapRouteComponent : IComponent
     {
         private readonly IUmbracoContextFactory _umbracoContextFactory;
 
-        public SitemapRouteComponet(IUmbracoContextFactory umbracoContextFactory)
+        public SitemapRouteComponent(IUmbracoContextFactory umbracoContextFactory)
         {
             _umbracoContextFactory = umbracoContextFactory;
         }
