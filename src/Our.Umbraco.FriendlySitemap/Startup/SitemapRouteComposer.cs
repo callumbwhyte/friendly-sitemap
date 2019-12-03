@@ -7,7 +7,7 @@ namespace Our.Umbraco.FriendlySitemap.Startup
     {
         public void Compose(Composition composition)
         {
-            composition.Components().Insert<SitemapRouteComponet>();
+            composition.Components().Insert<SitemapRouteComponent>();
         }
     }
 }
