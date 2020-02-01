@@ -5,6 +5,8 @@
 [![NuGet release](https://img.shields.io/nuget/v/Our.Umbraco.FriendlySitemap.svg)](https://www.nuget.org/packages/Our.Umbraco.FriendlySitemap/)
 [![Our Umbraco project page](https://img.shields.io/badge/our-umbraco-orange.svg)](https://our.umbraco.com/projects/website-utilities/friendly-sitemap/)
 
+Friendly Sitemap makes adding a dynamic `sitemap.xml` file to your Umbraco 8 website easy!
+
 ## Getting started
 
 This package is supported on Umbraco 8.1+.
