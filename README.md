@@ -17,13 +17,71 @@ Friendly Sitemap is available from Our Umbraco, NuGet, or as a manual download d
 
 #### Our Umbraco repository
 
-You can find a downloadable package, along with a discussion forum for this package, on the [Our Umbraco](https://our.umbraco.com/projects/website-utilities/friendly-sitemap/) site.
+You can find a downloadable package on the [Our Umbraco](https://our.umbraco.com/projects/website-utilities/friendly-sitemap/) site.
 
 #### NuGet package repository
 
 To [install from NuGet](https://www.nuget.org/packages/Our.Umbraco.FriendlySitemap/), run the following command in your instance of Visual Studio.
 
     PM> Install-Package Our.Umbraco.FriendlySitemap
+
+## Usage
+
+Once installed, the sitemap will be visible on the URL `/sitemap.xml`, such as `https://www.yoursite.com/sitemap.xml`. The items disaplayed in the sitemap will be specific for the current domain.
+
+If a physical `sitemap.xml` file exists in your website, the dynamically generated sitemap will be disabled.
+
+It is possible to disable the sitemap via the appsettings section of your `web.config` file should you need to.
+
+```
+<add key="Umbraco.Sitemap.EnableSitemap" value="false" />
+```
+
+### Controlling output
+
+By default the sitemap will include all content items within a current site that have a template assigned.
+
+Adding a true / false (boolean) property to any doctype with the alias `sitemapExclude` makes it possible to hide specific items from the sitemap.
+
+All of the XML Sitemap v0.9 [tag definitions](https://www.sitemaps.org/protocol.html#xmlTagDefinitions) can be supported by adding properties with specific aliases to any doctype:
+
+| Attribute  | Property alias    |
+|------------|-------------------|
+| url        | url               |
+| lastmod    | updateDate        |
+| changefreq | sitemapChangeFreq | 
+| priority   | sitemapPriority   |
+
+### Advanced configuration
+
+It is possible to override the default configuration of the package using dependency injection, by registering a new instance of `SitemapConfiguration` within an `IUserComposer` class.
+
+This is helpful for advanced configuration needs, such as defining unique settings per site in a multi-site Umbraco installation.
+
+Here's an example:
+
+```
+using Our.Umbraco.FriendlySitemap.Startup;
+
+[Disable(typeof(SitemapComposer))]
+public class CustomSitemapComposer : IUserComposer
+{
+    public void Compose(Composition composition)
+    {
+        composition.Register(factory => GetConfiguration(), Lifetime.Request);
+    }
+
+    private SitemapConfiguration GetConfiguration()
+    {
+        var configuration = new SitemapConfiguration
+        {
+            EnableSitemap = true
+        };
+
+        return configuration;
+    }
+}
+```
 
 ## Contribution guidelines
 
