@@ -20,7 +20,6 @@ namespace Our.Umbraco.FriendlySitemap.Controllers
             _sitemapConfig = sitemapConfig;
         }
 
-        [OutputCache(Duration = 1800, VaryByParam = "none")]
         public ActionResult RenderSitemap()
         {
             if (_sitemapConfig.EnableSitemap == false)
