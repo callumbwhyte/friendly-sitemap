@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using System.Xml.Linq;
@@ -35,11 +36,23 @@ namespace Our.Umbraco.FriendlySitemap.Controllers
         {
             var startNode = UmbracoContext.PublishedRequest.PublishedContent;
 
-            var nodes = startNode
-                .Descendants()
-                .Where(x => x.HasTemplate() == true)
-                .Where(x => x.IsVisible() == true)
-                .Where(x => x.Value<bool>("sitemapExclude") == false);
+            IEnumerable<IPublishedContent> nodes;
+            if (_sitemapConfig.IncludeRootNode)
+            {
+                nodes = startNode
+                    .DescendantsOrSelf()
+                    .Where(x => x.HasTemplate() == true)
+                    .Where(x => x.IsVisible() == true)
+                    .Where(x => x.Value<bool>("sitemapExclude") == false);
+            }
+            else
+            {
+                nodes = startNode
+                    .Descendants()
+                    .Where(x => x.HasTemplate() == true)
+                    .Where(x => x.IsVisible() == true)
+                    .Where(x => x.Value<bool>("sitemapExclude") == false);
+            }
 
             XNamespace xmlns = "http://www.sitemaps.org/schemas/sitemap/0.9";
             XElement root = new XElement(xmlns + "urlset");
