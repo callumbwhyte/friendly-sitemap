@@ -16,10 +16,12 @@ namespace Our.Umbraco.FriendlySitemap.Startup
         private SitemapConfiguration GetConfiguration()
         {
             bool.TryParse(ConfigurationManager.AppSettings[Prefix + ".EnableSitemap"], out bool enableSitemap);
+            bool.TryParse(ConfigurationManager.AppSettings[Prefix + ".SitemapIncludeRootNode"], out bool sitemapIncludeRootNode);
 
             var configuration = new SitemapConfiguration
             {
-                EnableSitemap = enableSitemap
+                EnableSitemap = enableSitemap,
+                IncludeRootNode = sitemapIncludeRootNode
             };
 
             return configuration;
