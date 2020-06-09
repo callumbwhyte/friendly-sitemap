@@ -36,7 +36,7 @@ namespace Our.Umbraco.FriendlySitemap.Controllers
             var startNode = UmbracoContext.PublishedRequest.PublishedContent;
 
             var nodes = startNode
-                .Descendants()
+                .DescendantsOrSelf()
                 .Where(x => x.HasTemplate() == true)
                 .Where(x => x.IsVisible() == true)
                 .Where(x => x.Value<bool>("sitemapExclude") == false);
