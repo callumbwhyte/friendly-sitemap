@@ -46,24 +46,24 @@ namespace Our.Umbraco.FriendlySitemap.Controllers
 
             foreach (var node in nodes)
             {
-                var urlElement = new XElement("url", new[]
+                var urlElement = new XElement(xmlns + "url", new[]
                 {
-                    new XElement("loc", node.Url(mode: UrlMode.Absolute)),
-                    new XElement("lastmod", node.UpdateDate.ToString("yyyy-MM-dd"))
+                    new XElement(xmlns + "loc", node.Url(mode: UrlMode.Absolute)),
+                    new XElement(xmlns + "lastmod", node.UpdateDate.ToString("yyyy-MM-dd"))
                 });
 
                 var changeFreqency = node.Value<string>("sitemapChangeFreq");
 
                 if (string.IsNullOrWhiteSpace(changeFreqency) == false)
                 {
-                    urlElement.Add(new XElement("changefreq", changeFreqency.ToLower()));
+                    urlElement.Add(new XElement(xmlns + "changefreq", changeFreqency.ToLower()));
                 }
 
                 var priority = node.Value<decimal>("sitemapPriority");
 
                 if (priority > 0)
                 {
-                    urlElement.Add(new XElement("priority", priority));
+                    urlElement.Add(new XElement(xmlns + "priority", priority));
                 }
 
                 root.Add(urlElement);
