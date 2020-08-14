@@ -38,7 +38,6 @@ namespace Our.Umbraco.FriendlySitemap.Controllers
             var nodes = startNode
                 .DescendantsOrSelf()
                 .Where(x => x.HasTemplate() == true)
-                .Where(x => x.IsVisible() == true)
                 .Where(x => x.Value<bool>("sitemapExclude") == false);
 
             XNamespace xmlns = "http://www.sitemaps.org/schemas/sitemap/0.9";
