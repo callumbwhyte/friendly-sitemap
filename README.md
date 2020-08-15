@@ -95,6 +95,12 @@ This project is maintained by [Callum Whyte](https://callumwhyte.com/) and contr
 
 The package logo uses the [Sitemap](https://thenounproject.com/term/search/2711731/) icon from the [Noun Project](https://thenounproject.com) by [Adrien Coquet](https://thenounproject.com/coquet_adrien/), licensed under [CC BY 3.0 US](https://creativecommons.org/licenses/by/3.0/us/).
 
+### A special #h5yr to our contributors
+
+* [Karl Tynan](https://github.com/karltynan)
+* [Imran Haider](https://github.com/imranhaidercogworks)
+* [Aaron Sadler](https://github.com/AaronSadlerUK)
+
 ## License
 
 Copyright &copy; 2019 [Callum Whyte](https://callumwhyte.com/), and other contributors
