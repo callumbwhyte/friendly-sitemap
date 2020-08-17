@@ -2,6 +2,8 @@
 using System.Web.Mvc;
 using Our.Umbraco.FriendlySitemap.Builders;
 using Our.Umbraco.FriendlySitemap.Configuration;
+using Our.Umbraco.FriendlySitemap.Helpers;
+using Umbraco.Web;
 using Umbraco.Web.Mvc;
 
 namespace Our.Umbraco.FriendlySitemap.Controllers
@@ -29,9 +31,12 @@ namespace Our.Umbraco.FriendlySitemap.Controllers
                 return HttpNotFound();
             }
 
-            var sitemapXml = SitemapBuilder.Build(startNode);
+            using (var writer = new UTF8StringWriter())
+            {
+                var sitemapXml = SitemapBuilder.Build(startNode);
 
-            return Content(sitemapXml, "text/xml", Encoding.UTF8);
+                return Content(sitemapXml, "text/xml", Encoding.UTF8);
+            }
         }
     }
 }
