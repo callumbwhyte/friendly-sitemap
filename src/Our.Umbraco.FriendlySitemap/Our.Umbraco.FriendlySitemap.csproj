@@ -6,12 +6,12 @@
     <Description>A friendly tool for creating dynamic sitemap.xml files in Umbraco 8</Description>
     <Authors>Callum Whyte</Authors>
     <Copyright>Copyright © 2020 Callum Whyte, and other contributors</Copyright>
-    <PackageLicenseUrl>https://github.com/callumbwhyte/friendly-sitemap/blob/master/LICENSE.md</PackageLicenseUrl>
+    <PackageLicenseUrl>https://github.com/callumbwhyte/friendly-sitemap/blob/main/LICENSE.md</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/callumbwhyte/friendly-sitemap</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/callumbwhyte/friendly-sitemap/master/docs/img/logo.png</PackageIconUrl>
-    <RepositoryUrl>https://github.com/callumbwhyte/dynamic-sitemap</RepositoryUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/callumbwhyte/friendly-sitemap/main/docs/img/logo.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/callumbwhyte/friendlt-sitemap</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <PackageTags>Umbraco Xml Sitemap SEO</PackageTags>
+    <PackageTags>umbraco xml sitemap seo</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
