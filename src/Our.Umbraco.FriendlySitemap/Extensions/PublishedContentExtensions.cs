@@ -1,4 +1,4 @@
-﻿using Umbraco.Core.Models.PublishedContent;
+using Umbraco.Core.Models.PublishedContent;
 
 namespace Our.Umbraco.FriendlySitemap.Extensions
 {
@@ -6,7 +6,7 @@ namespace Our.Umbraco.FriendlySitemap.Extensions
     {
         public static bool HasTemplate(this IPublishedContent content)
         {
-            return content.TemplateId.HasValue == true;
+            return content.TemplateId.HasValue == true && content.TemplateId > 0;
         }
     }
 }
