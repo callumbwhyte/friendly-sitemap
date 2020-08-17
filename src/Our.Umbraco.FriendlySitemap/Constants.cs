@@ -1,10 +1,14 @@
-﻿namespace Our.Umbraco.FriendlySitemap
+﻿using System;
+
+namespace Our.Umbraco.FriendlySitemap
 {
     public class Constants
     {
         public const string SitemapRouteName = "Xml Sitemap";
 
         public const string SitemapRouteUrl = "sitemap.xml";
+
+        public const string ConfigPrefix = "Umbraco.Sitemap.";
 
         public const string SitemapXmlns = "http://www.sitemaps.org/schemas/sitemap/0.9";
 
