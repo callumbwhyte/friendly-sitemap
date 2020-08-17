@@ -27,11 +27,11 @@ To [install from NuGet](https://www.nuget.org/packages/Our.Umbraco.FriendlySitem
 
 ## Usage
 
-Once installed, the sitemap will be visible on the URL `/sitemap.xml`, such as `https://www.yoursite.com/sitemap.xml`. The items disaplayed in the sitemap will be specific for the current domain.
+Once installed, the sitemap will be visible on the URL `/sitemap.xml`, such as `https://www.yoursite.com/sitemap.xml`. The items displayed in the sitemap will be specific to the current domain.
 
 If a physical `sitemap.xml` file exists in your website, the dynamically generated sitemap will be disabled.
 
-It is possible to disable the sitemap via the appsettings section of your `web.config` file should you need to.
+It is possible to disable the sitemap via an app setting in `web.config` file:
 
 ```
 <add key="Umbraco.Sitemap.EnableSitemap" value="false" />
@@ -39,11 +39,11 @@ It is possible to disable the sitemap via the appsettings section of your `web.c
 
 ### Controlling output
 
-By default the sitemap will include all content items within a current site that have a template assigned.
+By default the sitemap will include all content items within the current site with a template assigned.
 
 Adding a true / false (boolean) property to any doctype with the alias `sitemapExclude` makes it possible to hide specific items from the sitemap.
 
-All of the XML Sitemap v0.9 [tag definitions](https://www.sitemaps.org/protocol.html#xmlTagDefinitions) can be supported by adding properties with specific aliases to any doctype:
+All of the XML Sitemap v0.9 [tag definitions](https://www.sitemaps.org/protocol.html#xmlTagDefinitions) can be modified by adding properties with specific aliases to any doctype:
 
 | Attribute  | Property alias    |
 |------------|-------------------|
@@ -63,7 +63,7 @@ Here's an example:
 ```
 using Our.Umbraco.FriendlySitemap.Startup;
 
-[Disable(typeof(SitemapComposer))]
+[ComposeAfter(typeof(SitemapComposer))]
 public class CustomSitemapComposer : IUserComposer
 {
     public void Compose(Composition composition)
