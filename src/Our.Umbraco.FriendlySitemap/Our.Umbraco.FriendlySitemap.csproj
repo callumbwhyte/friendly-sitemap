@@ -9,7 +9,7 @@
     <PackageLicenseUrl>https://github.com/callumbwhyte/friendly-sitemap/blob/main/LICENSE.md</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/callumbwhyte/friendly-sitemap</PackageProjectUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/callumbwhyte/friendly-sitemap/main/docs/img/logo.png</PackageIconUrl>
-    <RepositoryUrl>https://github.com/callumbwhyte/friendlt-sitemap</RepositoryUrl>
+    <RepositoryUrl>https://github.com/callumbwhyte/friendly-sitemap</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>umbraco xml sitemap seo</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
