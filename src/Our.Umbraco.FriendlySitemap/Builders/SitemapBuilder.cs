@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Xml.Linq;
 using Our.Umbraco.FriendlySitemap.Extensions;
 using Umbraco.Core.Models.PublishedContent;
@@ -8,67 +6,52 @@ using Umbraco.Web;
 
 namespace Our.Umbraco.FriendlySitemap.Builders
 {
-    public static class SitemapBuilder
+    public class SitemapBuilder : ISitemapBuilder
     {
-        private static readonly XNamespace _xmlns = XNamespace.Get(Constants.SitemapXmlns);
+        private readonly XNamespace _xmlns = XNamespace.Get("https://www.sitemaps.org/schemas/sitemap/0.9/");
 
-        public static string Build(IPublishedContent startNode)
+        public XDocument BuildSitemap(IPublishedContent startNode)
         {
-            var nodes = BuildSitemapNodes(startNode);
-            var xmlElement = BuildXmlElement();
+            var nodes = startNode
+                .DescendantsOrSelf()
+                .Where(x => x.HasTemplate() == true)
+                .Where(x => x.Value<bool>("sitemapExclude") == false);
 
-            var sitemapXmlString = new StringWriterExtensions(new UTF8Encoding());
-            var xmlDeclaration = new XDeclaration("1.0", Encoding.UTF8.BodyName, "yes");
+            var urlsetElement = new XElement(_xmlns + "urlset");
 
             foreach (var node in nodes)
             {
-                var urlElement = new XElement(_xmlns +"url", 
-                    new XElement(_xmlns + "loc", node.Url(mode: UrlMode.Absolute)), 
-                    new XElement(_xmlns + "lastmod", node.UpdateDate.ToString("yyyy-MM-dd")));
-
-                var changeFreqency = node.Value<string>("sitemapChangeFreq");
-
-                if (string.IsNullOrWhiteSpace(changeFreqency) == false)
-                {
-                    urlElement.Add(new XElement(_xmlns + "changefreq", changeFreqency.ToLower()));
-                }
-
-                var priority = node.Value<decimal>("sitemapPriority");
-
-                if (priority > 0)
-                {
-                    urlElement.Add(new XElement(_xmlns + "priority", priority));
-                }
-
-                xmlElement.Add(urlElement);
+                urlsetElement.Add(BuildNode(node));
             }
 
-            var sitemapXml = new XDocument(xmlDeclaration, xmlElement);
+            var doc = new XDocument(urlsetElement);
 
-            sitemapXml.Save(sitemapXmlString);
-
-            return sitemapXmlString.ToString();
+            return doc;
         }
 
-        public static IEnumerable<IPublishedContent> BuildSitemapNodes(IPublishedContent startNode)
+        public XElement BuildNode(IPublishedContent node)
         {
-            return startNode
-                .DescendantsOrSelf()
-                .Where(x => x.HasTemplate())
-                .Where(x => x.IncludedInSitemap());
-        }
+            var urlElement = new XElement(_xmlns + "url", new[]
+            {
+                new XElement(_xmlns + "loc", node.Url(mode: UrlMode.Absolute)),
+                new XElement(_xmlns + "lastmod", node.UpdateDate.ToString("yyyy-MM-dd"))
+            });
 
-        private static XElement BuildXmlElement()
-        {
-            var xsi = XNamespace.Get(Constants.SitemapXsi);
-            var schemaLocation = XNamespace.Get(Constants.SitemapSchemaLocation);
+            var changeFrequency = node.Value<string>("sitemapChangeFreq");
 
-            var xmlElement =
-                new XElement(_xmlns + "urlset",
-                    new XAttribute(XNamespace.Xmlns + "xsi", xsi),
-                    new XAttribute(xsi + "schemaLocation", schemaLocation));
+            if (string.IsNullOrWhiteSpace(changeFrequency) == false)
+            {
+                urlElement.Add(new XElement(_xmlns + "changefreq", changeFrequency.ToLower()));
+            }
 
-            return xmlElement;
+            var priority = node.Value<decimal>("sitemapPriority");
+
+            if (priority > 0)
+            {
+                urlElement.Add(new XElement(_xmlns + "priority", priority));
+            }
+
+            return urlElement;
         }
     }
 }

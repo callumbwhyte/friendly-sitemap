@@ -11,10 +11,12 @@ namespace Our.Umbraco.FriendlySitemap.Controllers
     public class SitemapController : RenderMvcController
     {
         private readonly SitemapConfiguration _sitemapConfig;
+        private readonly ISitemapBuilder _sitemapBuilder;
 
-        public SitemapController(SitemapConfiguration sitemapConfig)
+        public SitemapController(SitemapConfiguration sitemapConfig, ISitemapBuilder sitemapBuilder)
         {
             _sitemapConfig = sitemapConfig;
+            _sitemapBuilder = sitemapBuilder;
         }
 
         public ActionResult RenderSitemap()
@@ -33,7 +35,11 @@ namespace Our.Umbraco.FriendlySitemap.Controllers
 
             using (var writer = new UTF8StringWriter())
             {
-                var sitemapXml = SitemapBuilder.Build(startNode);
+                var doc = _sitemapBuilder.BuildSitemap(startNode);
+
+                doc.Save(writer);
+
+                var sitemapXml = writer.ToString();
 
                 return Content(sitemapXml, "text/xml", Encoding.UTF8);
             }
