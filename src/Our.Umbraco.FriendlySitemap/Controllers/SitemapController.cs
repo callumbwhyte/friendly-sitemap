@@ -1,10 +1,8 @@
-﻿using System.Linq;
-using System.Text;
+﻿using System.Text;
 using System.Web.Mvc;
-using System.Xml.Linq;
+using Our.Umbraco.FriendlySitemap.Builders;
 using Our.Umbraco.FriendlySitemap.Configuration;
-using Our.Umbraco.FriendlySitemap.Extensions;
-using Umbraco.Core.Models.PublishedContent;
+using Our.Umbraco.FriendlySitemap.Helpers;
 using Umbraco.Web;
 using Umbraco.Web.Mvc;
 
@@ -13,10 +11,12 @@ namespace Our.Umbraco.FriendlySitemap.Controllers
     public class SitemapController : RenderMvcController
     {
         private readonly SitemapConfiguration _sitemapConfig;
+        private readonly ISitemapBuilder _sitemapBuilder;
 
-        public SitemapController(SitemapConfiguration sitemapConfig)
+        public SitemapController(SitemapConfiguration sitemapConfig, ISitemapBuilder sitemapBuilder)
         {
             _sitemapConfig = sitemapConfig;
+            _sitemapBuilder = sitemapBuilder;
         }
 
         public ActionResult RenderSitemap()
@@ -26,53 +26,23 @@ namespace Our.Umbraco.FriendlySitemap.Controllers
                 return HttpNotFound();
             }
 
-            var sitemapXml = BuildSitemap();
-
-            return Content(sitemapXml, "text/xml", Encoding.UTF8);
-        }
-
-        private string BuildSitemap()
-        {
             var startNode = UmbracoContext.PublishedRequest.PublishedContent;
 
-            var nodes = startNode
-                .DescendantsOrSelf()
-                .Where(x => x.HasTemplate() == true)
-                .Where(x => x.Value<bool>("sitemapExclude") == false);
-
-            XNamespace xmlns = "http://www.sitemaps.org/schemas/sitemap/0.9";
-            XElement root = new XElement(xmlns + "urlset");
-
-            foreach (var node in nodes)
+            if (startNode == null)
             {
-                var urlElement = new XElement(xmlns + "url", new[]
-                {
-                    new XElement(xmlns + "loc", node.Url(mode: UrlMode.Absolute)),
-                    new XElement(xmlns + "lastmod", node.UpdateDate.ToString("yyyy-MM-dd"))
-                });
-
-                var changeFreqency = node.Value<string>("sitemapChangeFreq");
-
-                if (string.IsNullOrWhiteSpace(changeFreqency) == false)
-                {
-                    urlElement.Add(new XElement(xmlns + "changefreq", changeFreqency.ToLower()));
-                }
-
-                var priority = node.Value<decimal>("sitemapPriority");
-
-                if (priority > 0)
-                {
-                    urlElement.Add(new XElement(xmlns + "priority", priority));
-                }
-
-                root.Add(urlElement);
+                return HttpNotFound();
             }
 
-            XDocument document = new XDocument(root);
+            using (var writer = new UTF8StringWriter())
+            {
+                var doc = _sitemapBuilder.BuildSitemap(startNode);
 
-            var sitemapXml = document.ToString();
+                doc.Save(writer);
 
-            return sitemapXml;
+                var sitemapXml = writer.ToString();
+
+                return Content(sitemapXml, "text/xml", Encoding.UTF8);
+            }
         }
     }
 }
