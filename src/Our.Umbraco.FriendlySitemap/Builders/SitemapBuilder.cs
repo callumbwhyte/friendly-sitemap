@@ -8,7 +8,7 @@ namespace Our.Umbraco.FriendlySitemap.Builders
 {
     public class SitemapBuilder : ISitemapBuilder
     {
-        private readonly XNamespace _xmlns = XNamespace.Get("https://www.sitemaps.org/schemas/sitemap/0.9");
+        private readonly XNamespace _xmlns = XNamespace.Get("http://www.sitemaps.org/schemas/sitemap/0.9");
 
         public XDocument BuildSitemap(IPublishedContent startNode)
         {
