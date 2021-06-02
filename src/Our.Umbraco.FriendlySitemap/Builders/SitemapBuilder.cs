@@ -21,7 +21,9 @@ namespace Our.Umbraco.FriendlySitemap.Builders
 
             foreach (var node in nodes)
             {
-                urlsetElement.Add(BuildNode(node));
+                var buildNode = BuildNode(node);
+                if(buildNode == null) continue;
+                urlsetElement.Add(buildNode);
             }
 
             var doc = new XDocument(urlsetElement);
@@ -31,9 +33,15 @@ namespace Our.Umbraco.FriendlySitemap.Builders
 
         public XElement BuildNode(IPublishedContent node)
         {
+            var url = node.Url(mode: UrlMode.Absolute);
+            if (url.StartsWith("http") == false)
+            {
+                // this is an invalid url, possibly because a domain is configured without host (eg /en)
+                return null;
+            }
             var urlElement = new XElement(_xmlns + "url", new[]
             {
-                new XElement(_xmlns + "loc", node.Url(mode: UrlMode.Absolute)),
+                new XElement(_xmlns + "loc", url),
                 new XElement(_xmlns + "lastmod", node.UpdateDate.ToString("yyyy-MM-dd"))
             });
 
