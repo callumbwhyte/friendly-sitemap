@@ -23,17 +23,24 @@ You can find a downloadable package on the [Our Umbraco](https://our.umbraco.com
 
 To [install from NuGet](https://www.nuget.org/packages/Our.Umbraco.FriendlySitemap/), run the following command in your instance of Visual Studio.
 
-    PM> Install-Package Our.Umbraco.FriendlySitemap
+```console
+PM> Install-Package Our.Umbraco.FriendlySitemap
+```
 
 ## Usage
 
 Once installed, the sitemap will be visible on the URL `/sitemap.xml`, such as `https://www.yoursite.com/sitemap.xml`. The items displayed in the sitemap will be specific to the current domain.
 
 If a physical `sitemap.xml` file exists in your website, the dynamically generated sitemap will be disabled.
+It is possible to override the url of the sitemap.
+
+```xml
+<add key="Umbraco.Sitemap.SitemapUrl" value="xmlsitemap" />
+```
 
 It is possible to disable the sitemap via an app setting in `web.config` file:
 
-```
+```xml
 <add key="Umbraco.Sitemap.EnableSitemap" value="false" />
 ```
 
@@ -46,10 +53,10 @@ Adding a true / false (boolean) property to any doctype with the alias `sitemapE
 All of the XML Sitemap v0.9 [tag definitions](https://www.sitemaps.org/protocol.html#xmlTagDefinitions) can be modified by adding properties with specific aliases to any doctype:
 
 | Attribute  | Property alias    |
-|------------|-------------------|
+| ---------- | ----------------- |
 | url        | url               |
 | lastmod    | updateDate        |
-| changefreq | sitemapChangeFreq | 
+| changefreq | sitemapChangeFreq |
 | priority   | sitemapPriority   |
 
 ### Advanced configuration
@@ -60,7 +67,7 @@ This is helpful for advanced configuration needs, such as defining unique settin
 
 Here's an example:
 
-```
+```csharp
 using Our.Umbraco.FriendlySitemap.Startup;
 
 [ComposeAfter(typeof(SitemapComposer))]
@@ -75,7 +82,8 @@ public class CustomSitemapComposer : IUserComposer
     {
         var configuration = new SitemapConfiguration
         {
-            EnableSitemap = true
+            EnableSitemap = true,
+            SitemapUrl = "xmlsitemap"
         };
 
         return configuration;
