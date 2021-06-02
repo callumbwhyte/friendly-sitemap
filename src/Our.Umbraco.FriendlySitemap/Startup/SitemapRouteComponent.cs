@@ -1,4 +1,5 @@
-﻿using System.Web.Routing;
+﻿using System.Configuration;
+using System.Web.Routing;
 using Our.Umbraco.Extensions.Routing;
 using Umbraco.Core.Composing;
 using Umbraco.Web;
@@ -16,9 +17,15 @@ namespace Our.Umbraco.FriendlySitemap.Startup
 
         public void Initialize()
         {
+            var sitemapUrl = ConfigurationManager.AppSettings[Constants.ConfigPrefix + "SitemapUrl"];
+            if (string.IsNullOrWhiteSpace(sitemapUrl))
+            {
+                sitemapUrl = Constants.DefaultSitemapUrl;
+            }
+
             RouteTable.Routes.MapUmbracoRoute(
                 Constants.SitemapRouteName,
-                Constants.SitemapRouteUrl,
+                sitemapUrl,
                 new
                 {
                     controller = "Sitemap",
