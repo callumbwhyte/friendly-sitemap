@@ -20,10 +20,16 @@ namespace Our.Umbraco.FriendlySitemap.Startup
         private SitemapConfiguration GetConfiguration()
         {
             bool.TryParse(ConfigurationManager.AppSettings[Constants.ConfigPrefix + "EnableSitemap"], out bool enableSitemap);
+            var sitemapUrl = ConfigurationManager.AppSettings[Constants.ConfigPrefix + "SitemapUrl"];
+            if (string.IsNullOrWhiteSpace(sitemapUrl))
+            {
+                sitemapUrl = Constants.DefaultSitemapUrl;
+            }
 
             var configuration = new SitemapConfiguration
             {
-                EnableSitemap = enableSitemap
+                EnableSitemap = enableSitemap,
+                SitemapUrl = sitemapUrl
             };
 
             return configuration;
