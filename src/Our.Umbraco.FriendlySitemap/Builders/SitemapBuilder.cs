@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
 using Our.Umbraco.FriendlySitemap.Extensions;
+using Umbraco.Core;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 
@@ -32,6 +33,24 @@ namespace Our.Umbraco.FriendlySitemap.Builders
                 new XElement(_xmlns + "loc", node.Url(culture: culture.Name, mode: UrlMode.Absolute)),
                 new XElement(_xmlns + "lastmod", node.UpdateDate.ToString("yyyy-MM-dd"))
             });
+
+            var variants = node.Cultures.Values
+                .Where(x => x.Culture.IsNullOrWhiteSpace() == false)
+                .Where(x => x.Culture.InvariantEquals(culture.Name) == false);
+
+            var linkNamespace = XNamespace.Get("http://www.w3.org/1999/xhtml");
+
+            foreach (var variant in variants)
+            {
+                var linkElement = new XElement(linkNamespace + "link", new[]
+                {
+                    new XAttribute("href", node.Url(culture: variant.Culture, mode: UrlMode.Absolute)),
+                    new XAttribute("hreflang", variant.Culture),
+                    new XAttribute("rel", "alternate")
+                });
+
+                urlElement.Add(linkElement);
+            }
 
             var changeFrequency = node.Value<string>("sitemapChangeFreq");
 
