@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
@@ -30,8 +31,7 @@ namespace Our.Umbraco.FriendlySitemap.Builders
         {
             var urlElement = new XElement(_xmlns + "url", new[]
             {
-                new XElement(_xmlns + "loc", node.Url(culture: culture.Name, mode: UrlMode.Absolute)),
-                new XElement(_xmlns + "lastmod", node.UpdateDate.ToString("yyyy-MM-dd"))
+                new XElement(_xmlns + "loc", node.Url(culture: culture.Name, mode: UrlMode.Absolute))
             });
 
             var variants = node.Cultures.Values
@@ -52,7 +52,12 @@ namespace Our.Umbraco.FriendlySitemap.Builders
                 urlElement.Add(linkElement);
             }
 
-            var changeFrequency = node.Value<string>("sitemapChangeFreq");
+            var lastModified = node.Value<DateTime?>("sitemapLastMod") ?? node.UpdateDate;
+
+            if (lastModified > DateTime.MinValue)
+            {
+                urlElement.Add(new XElement("lastmod", lastModified.ToString("yyyy-MM-dd")));
+            }
 
             if (string.IsNullOrWhiteSpace(changeFrequency) == false)
             {
