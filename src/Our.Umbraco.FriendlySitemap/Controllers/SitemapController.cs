@@ -21,7 +21,7 @@ namespace Our.Umbraco.FriendlySitemap.Controllers
 
         public ActionResult RenderSitemap()
         {
-            if (_sitemapConfig.EnableSitemap == false)
+            if (_sitemapConfig.IsEnabled == false)
             {
                 return HttpNotFound();
             }

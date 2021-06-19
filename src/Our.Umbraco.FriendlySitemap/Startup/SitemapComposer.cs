@@ -1,4 +1,3 @@
-﻿using System.Configuration;
 using Our.Umbraco.FriendlySitemap.Builders;
 using Our.Umbraco.FriendlySitemap.Configuration;
 using Umbraco.Core;
@@ -14,19 +13,7 @@ namespace Our.Umbraco.FriendlySitemap.Startup
 
             composition.RegisterUnique<ISitemapBuilder, SitemapBuilder>();
 
-            composition.Register(factory => GetConfiguration());
-        }
-
-        private SitemapConfiguration GetConfiguration()
-        {
-            bool.TryParse(ConfigurationManager.AppSettings[Constants.ConfigPrefix + "EnableSitemap"], out bool enableSitemap);
-
-            var configuration = new SitemapConfiguration
-            {
-                EnableSitemap = enableSitemap
-            };
-
-            return configuration;
+            composition.Register(factory => SitemapConfiguration.Create());
         }
     }
 }
