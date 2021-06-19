@@ -1,10 +1,11 @@
-﻿using System.Xml.Linq;
+﻿using System.Globalization;
+using System.Xml.Linq;
 using Umbraco.Core.Models.PublishedContent;
 
 namespace Our.Umbraco.FriendlySitemap.Builders
 {
     public interface ISitemapBuilder
     {
-        XDocument BuildSitemap(IPublishedContent startNode);
+        XDocument BuildSitemap(IPublishedContent node, CultureInfo culture);
     }
 }

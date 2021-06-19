@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Xml.Linq;
 using Our.Umbraco.FriendlySitemap.Extensions;
 using Umbraco.Core.Models.PublishedContent;
@@ -10,30 +12,24 @@ namespace Our.Umbraco.FriendlySitemap.Builders
     {
         private readonly XNamespace _xmlns = XNamespace.Get("http://www.sitemaps.org/schemas/sitemap/0.9");
 
-        public XDocument BuildSitemap(IPublishedContent startNode)
+        public XDocument BuildSitemap(IPublishedContent startNode, CultureInfo culture)
         {
-            var nodes = startNode
-                .DescendantsOrSelf()
-                .Where(x => x.HasTemplate() == true)
-                .Where(x => x.Value<bool>("sitemapExclude") == false);
+            var nodes = GetContentItems(startNode);
 
             var urlsetElement = new XElement(_xmlns + "urlset");
 
-            foreach (var node in nodes)
-            {
-                urlsetElement.Add(BuildNode(node));
-            }
+            urlsetElement.Add(nodes.Select(x => BuildNode(x, culture)));
 
             var doc = new XDocument(urlsetElement);
 
             return doc;
         }
 
-        public XElement BuildNode(IPublishedContent node)
+        public XElement BuildNode(IPublishedContent node, CultureInfo culture)
         {
             var urlElement = new XElement(_xmlns + "url", new[]
             {
-                new XElement(_xmlns + "loc", node.Url(mode: UrlMode.Absolute)),
+                new XElement(_xmlns + "loc", node.Url(culture: culture.Name, mode: UrlMode.Absolute)),
                 new XElement(_xmlns + "lastmod", node.UpdateDate.ToString("yyyy-MM-dd"))
             });
 
@@ -52,6 +48,14 @@ namespace Our.Umbraco.FriendlySitemap.Builders
             }
 
             return urlElement;
+        }
+
+        public virtual IEnumerable<IPublishedContent> GetContentItems(IPublishedContent node)
+        {
+            return node
+                .DescendantsOrSelf()
+                .Where(x => x.HasTemplate() == true)
+                .Where(x => x.Value<bool>("sitemapExclude") == false);
         }
     }
 }

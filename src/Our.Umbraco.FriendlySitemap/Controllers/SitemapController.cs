@@ -26,17 +26,26 @@ namespace Our.Umbraco.FriendlySitemap.Controllers
                 return HttpNotFound();
             }
 
-            var startNode = UmbracoContext.PublishedRequest.PublishedContent;
+            var request = UmbracoContext.PublishedRequest;
+
+            var startNode = request?.PublishedContent;
 
             if (startNode == null)
             {
                 return HttpNotFound();
             }
 
+            var culture = request?.Culture;
+
+            if (culture == null)
+            {
+                return HttpNotFound();
+            }
+
+            var doc = builder.BuildSitemap(startNode, culture);
+
             using (var writer = new UTF8StringWriter())
             {
-                var doc = _sitemapBuilder.BuildSitemap(startNode);
-
                 doc.Save(writer);
 
                 var sitemapXml = writer.ToString();
