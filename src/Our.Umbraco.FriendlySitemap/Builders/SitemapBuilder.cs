@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
+using Our.Umbraco.FriendlySitemap.Configuration;
 using Our.Umbraco.FriendlySitemap.Extensions;
 using Umbraco.Core;
 using Umbraco.Core.Models.PublishedContent;
@@ -13,6 +14,13 @@ namespace Our.Umbraco.FriendlySitemap.Builders
     public class SitemapBuilder : ISitemapBuilder
     {
         private readonly XNamespace _xmlns = XNamespace.Get("http://www.sitemaps.org/schemas/sitemap/0.9");
+
+        private readonly SitemapConfiguration _config;
+
+        public SitemapBuilder(SitemapConfiguration config)
+        {
+            _config = config;
+        }
 
         public XDocument BuildSitemap(IPublishedContent startNode, CultureInfo culture)
         {
@@ -52,19 +60,21 @@ namespace Our.Umbraco.FriendlySitemap.Builders
                 urlElement.Add(linkElement);
             }
 
-            var lastModified = node.Value<DateTime?>("sitemapLastMod") ?? node.UpdateDate;
+            var lastModified = node.Value<DateTime?>(_config.Fields.LastModified) ?? node.UpdateDate;
 
             if (lastModified > DateTime.MinValue)
             {
                 urlElement.Add(new XElement("lastmod", lastModified.ToString("yyyy-MM-dd")));
             }
 
+            var changeFrequency = node.Value<string>(_config.Fields.ChangeFrequency);
+
             if (string.IsNullOrWhiteSpace(changeFrequency) == false)
             {
                 urlElement.Add(new XElement(_xmlns + "changefreq", changeFrequency.ToLower()));
             }
 
-            var priority = node.Value<decimal>("sitemapPriority");
+            var priority = node.Value<decimal>(_config.Fields.Priority);
 
             if (priority > 0)
             {
@@ -79,7 +89,7 @@ namespace Our.Umbraco.FriendlySitemap.Builders
             return node
                 .DescendantsOrSelf()
                 .Where(x => x.HasTemplate() == true)
-                .Where(x => x.Value<bool>("sitemapExclude") == false);
+                .Where(x => x.Value<bool>(_config.Fields.Exclude) == false);
         }
     }
 }

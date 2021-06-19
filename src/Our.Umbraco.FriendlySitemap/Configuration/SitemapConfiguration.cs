@@ -6,6 +6,8 @@ namespace Our.Umbraco.FriendlySitemap.Configuration
     {
         public bool IsEnabled { get; set; }
 
+        public SitemapFields Fields { get; set; } = SitemapFields.Create();
+
         public static SitemapConfiguration Create()
         {
             var config = new SitemapConfiguration();

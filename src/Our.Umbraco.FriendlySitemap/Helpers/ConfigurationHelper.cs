@@ -5,6 +5,16 @@ namespace Our.Umbraco.FriendlySitemap.Helpers
 {
     public static class ConfigurationHelper
     {
+        public static void SetProperty(string key, Action<string> setValue)
+        {
+            var value = ConfigurationManager.AppSettings[key];
+
+            if (string.IsNullOrWhiteSpace(value) == false)
+            {
+                setValue(value);
+            }
+        }
+
         public static void SetProperty(string key, Action<bool> setValue)
         {
             bool.TryParse(ConfigurationManager.AppSettings[key], out bool property);
