@@ -1,7 +1,8 @@
 ﻿using System.Text;
 using System.Web.Mvc;
+using System.Web.Routing;
 using Our.Umbraco.FriendlySitemap.Builders;
-using Our.Umbraco.FriendlySitemap.Configuration;
+using Our.Umbraco.FriendlySitemap.Composing;
 using Our.Umbraco.FriendlySitemap.Helpers;
 using Umbraco.Web;
 using Umbraco.Web.Mvc;
@@ -10,18 +11,18 @@ namespace Our.Umbraco.FriendlySitemap.Controllers
 {
     public class SitemapController : RenderMvcController
     {
-        private readonly SitemapConfiguration _sitemapConfig;
-        private readonly ISitemapBuilder _sitemapBuilder;
+        private readonly SitemapCollection _sitemapCollection;
 
-        public SitemapController(SitemapConfiguration sitemapConfig, ISitemapBuilder sitemapBuilder)
+        public SitemapController(SitemapCollection sitemapCollection)
         {
-            _sitemapConfig = sitemapConfig;
-            _sitemapBuilder = sitemapBuilder;
+            _sitemapCollection = sitemapCollection;
         }
 
         public ActionResult RenderSitemap()
         {
-            if (_sitemapConfig.IsEnabled == false)
+            var route = ((Route)RouteData.Route).Url;
+
+            if (_sitemapCollection.TryGetValue(route, out ISitemapBuilder builder) == false)
             {
                 return HttpNotFound();
             }
@@ -43,6 +44,11 @@ namespace Our.Umbraco.FriendlySitemap.Controllers
             }
 
             var doc = builder.BuildSitemap(startNode, culture);
+
+            if (doc == null)
+            {
+                return HttpNotFound();
+            }
 
             using (var writer = new UTF8StringWriter())
             {
