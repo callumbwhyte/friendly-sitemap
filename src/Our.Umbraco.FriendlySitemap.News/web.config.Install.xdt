@@ -3,5 +3,6 @@
   <appSettings>
     <add key="Umbraco.Sitemap.News.Enable" value="true" xdt:Transform="Insert" />
     <add key="Umbraco.Sitemap.News.PublicationName" value="true" xdt:Transform="Insert" />
+    <add key="Umbraco.Sitemap.News.ContentTypes" value="true" xdt:Transform="Insert" />
   </appSettings>
 </configuration>

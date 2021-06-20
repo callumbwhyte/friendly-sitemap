@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Xml.Linq;
 using Our.Umbraco.FriendlySitemap.Builders;
 using Our.Umbraco.FriendlySitemap.Extensions;
@@ -57,6 +58,13 @@ namespace Our.Umbraco.FriendlySitemap.News.Builders
             }
 
             return newsElement;
+        }
+
+        public override IEnumerable<IPublishedContent> GetContentItems(IPublishedContent node)
+        {
+            return node
+                .DescendantsOfType(_config.ContentTypes)
+                .Where(x => x.HasTemplate() == true);
         }
     }
 }
