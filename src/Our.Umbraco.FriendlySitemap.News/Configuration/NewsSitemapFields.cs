@@ -8,6 +8,10 @@ namespace Our.Umbraco.FriendlySitemap.News.Configuration
 
         public string Date { get; set; } = "publicationDate";
 
+        public string Genres { get; set; } = "genres";
+
+        public string Keywords { get; set; } = "keywords";
+
         public static NewsSitemapFields Create()
         {
             var fields = new NewsSitemapFields();
@@ -15,6 +19,10 @@ namespace Our.Umbraco.FriendlySitemap.News.Configuration
             ConfigurationHelper.SetProperty(Constants.ConfigPrefix + ".Fields.Title", value => fields.Title = value);
 
             ConfigurationHelper.SetProperty(Constants.ConfigPrefix + ".Fields.Date", value => fields.Date = value);
+
+            ConfigurationHelper.SetProperty(Constants.ConfigPrefix + ".Fields.Genres", value => fields.Genres = value);
+
+            ConfigurationHelper.SetProperty(Constants.ConfigPrefix + ".Fields.Keywords", value => fields.Keywords = value);
 
             return fields;
         }

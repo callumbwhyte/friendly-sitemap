@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
@@ -55,6 +56,20 @@ namespace Our.Umbraco.FriendlySitemap.News.Builders
             if (publicationDate > DateTime.MinValue)
             {
                 newsElement.AddChild("publication_date", publicationDate.ToString("yyyy-MM-dd hh:mm:ss"));
+            }
+
+            var genres = node.Value<IEnumerable<string>>(_config.Fields.Genres, culture.Name);
+
+            if (genres != null && genres.Any() == true)
+            {
+                newsElement.AddChild("genres", string.Join(",", genres));
+            }
+
+            var keywords = node.Value<IEnumerable<string>>(_config.Fields.Keywords, culture.Name);
+
+            if (keywords != null && keywords.Any() == true)
+            {
+                newsElement.AddChild("keywords", string.Join(",", keywords));
             }
 
             return newsElement;
