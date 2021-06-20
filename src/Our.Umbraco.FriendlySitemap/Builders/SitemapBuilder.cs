@@ -53,21 +53,22 @@ namespace Our.Umbraco.FriendlySitemap.Builders
                 urlElement.Add(linkElement);
             }
 
-            var lastModified = node.Value<DateTime?>(_config.Fields.LastModified) ?? node.UpdateDate;
+            var lastModified = node.Value<DateTime?>(_config.Fields.LastModified, culture.Name)
+                ?? node.UpdateDate;
 
             if (lastModified > DateTime.MinValue)
             {
                 urlElement.AddChild("lastmod", lastModified.ToString("yyyy-MM-dd"));
             }
 
-            var changeFrequency = node.Value<string>(_config.Fields.ChangeFrequency);
+            var changeFrequency = node.Value<string>(_config.Fields.ChangeFrequency, culture.Name);
 
             if (string.IsNullOrWhiteSpace(changeFrequency) == false)
             {
                 urlElement.AddChild("changefreq", changeFrequency.ToLower());
             }
 
-            var priority = node.Value<decimal>(_config.Fields.Priority);
+            var priority = node.Value<decimal>(_config.Fields.Priority, culture.Name);
 
             if (priority > 0)
             {
