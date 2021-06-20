@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <Version Condition="'$(BUILD_BUILDNUMBER)' == ''">1.0.0.0</Version>
+    <Version Condition="'$(BUILD_BUILDNUMBER)' != ''">$(BUILD_BUILDNUMBER)</Version>
+    <Description>A friendly tool for creating dynamic Google News sitemap.xml files in Umbraco 8</Description>
+    <Authors>Callum Whyte</Authors>
+    <Copyright>Copyright © 2021 Callum Whyte, and other contributors</Copyright>
+    <PackageLicenseUrl>https://github.com/callumbwhyte/friendly-sitemap/blob/main/LICENSE.md</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/callumbwhyte/friendly-sitemap</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/callumbwhyte/friendly-sitemap/main/docs/img/logo-news.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/callumbwhyte/friendly-sitemap</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>umbraco xml sitemap seo google news</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="web.config.Install.xdt" />
+    <Content Include="web.config.Uninstall.xdt" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Our.Umbraco.FriendlySitemap" Version="1.2.0" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <appSettings>
+    <add key="Umbraco.Sitemap.News.Enable" value="true" xdt:Transform="Insert" />
+    <add key="Umbraco.Sitemap.News.PublicationName" value="true" xdt:Transform="Insert" />
+  </appSettings>
+</configuration>

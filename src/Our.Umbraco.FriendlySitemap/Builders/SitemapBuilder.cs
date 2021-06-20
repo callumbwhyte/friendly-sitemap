@@ -34,7 +34,7 @@ namespace Our.Umbraco.FriendlySitemap.Builders
 
         public override XElement BuildUrlElement(IPublishedContent node, CultureInfo culture)
         {
-            var urlElement = new XElement(Namespace + "url");
+            var urlElement = base.BuildUrlElement(node, culture);
 
             var variants = node.Cultures.Values
                 .Where(x => x.Culture.IsNullOrWhiteSpace() == false)

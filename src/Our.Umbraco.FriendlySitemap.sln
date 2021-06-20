@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.168
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30104.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Our.Umbraco.FriendlySitemap", "Our.Umbraco.FriendlySitemap\Our.Umbraco.FriendlySitemap.csproj", "{9E53EF5A-F256-4225-8391-44B32FE1B49A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Our.Umbraco.FriendlySitemap.News", "Our.Umbraco.FriendlySitemap.News\Our.Umbraco.FriendlySitemap.News.csproj", "{2EE6E59E-C3DA-4A5E-8B47-AC7CC0D33359}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{9E53EF5A-F256-4225-8391-44B32FE1B49A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E53EF5A-F256-4225-8391-44B32FE1B49A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E53EF5A-F256-4225-8391-44B32FE1B49A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EE6E59E-C3DA-4A5E-8B47-AC7CC0D33359}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EE6E59E-C3DA-4A5E-8B47-AC7CC0D33359}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EE6E59E-C3DA-4A5E-8B47-AC7CC0D33359}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EE6E59E-C3DA-4A5E-8B47-AC7CC0D33359}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

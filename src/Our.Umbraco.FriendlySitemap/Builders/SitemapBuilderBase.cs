@@ -43,7 +43,23 @@ namespace Our.Umbraco.FriendlySitemap.Builders
             return new XElement(Namespace + "urlset");
         }
 
-        public abstract XElement BuildUrlElement(IPublishedContent node, CultureInfo culture);
+        public virtual XElement BuildUrlElement(IPublishedContent node, CultureInfo culture)
+        {
+            var urlElement = new XElement(Namespace + "url");
+
+            urlElement.AddChild("loc", node.Url(culture: culture.Name, mode: UrlMode.Absolute));
+
+            var metaElement = BuildMetaElement(node, culture);
+
+            if (metaElement != null)
+            {
+                urlElement.Add(metaElement);
+            }
+
+            return urlElement;
+        }
+
+        public virtual XElement BuildMetaElement(IPublishedContent node, CultureInfo culture) => null;
 
         public virtual IEnumerable<IPublishedContent> GetContentItems(IPublishedContent node)
         {

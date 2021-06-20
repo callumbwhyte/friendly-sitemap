@@ -1,0 +1,7 @@
+﻿<?xml version="1.0"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <appSettings>
+    <add key="Umbraco.Sitemap.News.Enable" xdt:Transform="Remove" xdt:Locator="Match(key)" />
+    <add key="Umbraco.Sitemap.News.PublicationName" xdt:Transform="Remove" xdt:Locator="Match(key)" />
+  </appSettings>
+</configuration>
