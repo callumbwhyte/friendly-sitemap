@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
 using Our.Umbraco.FriendlySitemap.Configuration;
+using Our.Umbraco.FriendlySitemap.Extensions;
 using Umbraco.Core;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
@@ -26,7 +27,7 @@ namespace Our.Umbraco.FriendlySitemap.Builders
         {
             var urlsetElement = base.BuildUrlSetElement(node, culture);
 
-            urlsetElement.Add(new XAttribute(XNamespace.Xmlns + "xhtml", _xmlns));
+            urlsetElement.AddNamespace("xhtml", _xmlns);
 
             return urlsetElement;
         }
@@ -41,12 +42,13 @@ namespace Our.Umbraco.FriendlySitemap.Builders
 
             foreach (var variant in variants)
             {
-                var linkElement = new XElement(_xmlns + "link", new[]
-                {
-                    new XAttribute("href", node.Url(culture: variant.Culture, mode: UrlMode.Absolute)),
-                    new XAttribute("hreflang", variant.Culture),
-                    new XAttribute("rel", "alternate")
-                });
+                var linkElement = new XElement(_xmlns + "link");
+
+                linkElement.AddAttribute("href", node.Url(culture: variant.Culture, mode: UrlMode.Absolute));
+
+                linkElement.AddAttribute("hreflang", variant.Culture);
+
+                linkElement.AddAttribute("rel", "alternate");
 
                 urlElement.Add(linkElement);
             }
@@ -55,21 +57,21 @@ namespace Our.Umbraco.FriendlySitemap.Builders
 
             if (lastModified > DateTime.MinValue)
             {
-                urlElement.Add(new XElement("lastmod", lastModified.ToString("yyyy-MM-dd")));
+                urlElement.AddChild("lastmod", lastModified.ToString("yyyy-MM-dd"));
             }
 
             var changeFrequency = node.Value<string>(_config.Fields.ChangeFrequency);
 
             if (string.IsNullOrWhiteSpace(changeFrequency) == false)
             {
-                urlElement.Add(new XElement(_xmlns + "changefreq", changeFrequency.ToLower()));
+                urlElement.AddChild("changefreq", changeFrequency.ToLower());
             }
 
             var priority = node.Value<decimal>(_config.Fields.Priority);
 
             if (priority > 0)
             {
-                urlElement.Add(new XElement(_xmlns + "priority", priority));
+                urlElement.AddChild("priority", priority);
             }
 
             return urlElement;
