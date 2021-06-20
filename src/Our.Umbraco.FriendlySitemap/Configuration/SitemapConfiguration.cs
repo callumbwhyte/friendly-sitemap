@@ -2,7 +2,7 @@
 
 namespace Our.Umbraco.FriendlySitemap.Configuration
 {
-    public class SitemapConfiguration
+    public class SitemapConfiguration : ISitemapConfiguration
     {
         public bool IsEnabled { get; set; }
 
