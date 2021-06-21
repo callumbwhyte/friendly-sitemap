@@ -2,5 +2,6 @@
 <configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
   <appSettings>
     <add key="Umbraco.Sitemap.Images.Enable" value="true" xdt:Transform="Insert" />
+    <add key="Umbraco.Sitemap.Images.MediaTypes" value="true" xdt:Transform="Insert" />
   </appSettings>
 </configuration>

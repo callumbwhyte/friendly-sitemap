@@ -2,5 +2,6 @@
 <configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
   <appSettings>
     <add key="Umbraco.Sitemap.Images.Enable" xdt:Transform="Remove" xdt:Locator="Match(key)" />
+    <add key="Umbraco.Sitemap.Images.MediaTypes" xdt:Transform="Remove" xdt:Locator="Match(key)" />
   </appSettings>
 </configuration>

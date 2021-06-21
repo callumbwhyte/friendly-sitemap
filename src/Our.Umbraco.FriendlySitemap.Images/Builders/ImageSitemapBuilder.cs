@@ -6,6 +6,7 @@ using Our.Umbraco.FriendlySitemap.Builders;
 using Our.Umbraco.FriendlySitemap.Extensions;
 using Our.Umbraco.FriendlySitemap.Images.Configuration;
 using Our.Umbraco.FriendlySitemap.Images.Persistence;
+using Umbraco.Core;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Core.Persistence;
 using Umbraco.Web;
@@ -18,6 +19,7 @@ namespace Our.Umbraco.FriendlySitemap.Images.Builders
 
         private readonly IUmbracoContextFactory _contextFactory;
         private readonly IImageRepository _imageRepository;
+        private readonly ImageSitemapConfiguration _config;
 
         private IDictionary<int, IEnumerable<int>> _contentMap;
 
@@ -27,6 +29,7 @@ namespace Our.Umbraco.FriendlySitemap.Images.Builders
         {
             _contextFactory = contextFactory;
             _imageRepository = imageRepository;
+            _config = config;
         }
 
         public override XElement BuildUrlSetElement(IPublishedContent node, CultureInfo culture)
@@ -49,7 +52,8 @@ namespace Our.Umbraco.FriendlySitemap.Images.Builders
             {
                 var images = imageIds
                     .Select(context.UmbracoContext.Media.GetById)
-                    .Where(x => x != null);
+                    .Where(x => x != null)
+                    .Where(x => _config.MediaTypes.InvariantContains(x.ContentType.Alias));
 
                 if (images.Any() == false)
                 {
