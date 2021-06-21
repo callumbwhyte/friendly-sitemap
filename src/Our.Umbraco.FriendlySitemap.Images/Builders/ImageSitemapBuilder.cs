@@ -19,6 +19,8 @@ namespace Our.Umbraco.FriendlySitemap.Images.Builders
         private readonly IUmbracoContextFactory _contextFactory;
         private readonly IImageRepository _imageRepository;
 
+        private IDictionary<int, IEnumerable<int>> _contentMap;
+
         public ImageSitemapBuilder(IUmbracoContextFactory contextFactory, IImageRepository imageRepository,
             ImageSitemapConfiguration config)
             : base(config)
@@ -36,13 +38,53 @@ namespace Our.Umbraco.FriendlySitemap.Images.Builders
             return urlsetElement;
         }
 
-        public override IEnumerable<IPublishedContent> GetContentItems(IPublishedContent node)
+        public override XElement BuildUrlElement(IPublishedContent node, CultureInfo culture)
         {
-            var contentMap = _imageRepository.GetDescendants(node.Id);
+            if (_contentMap.TryGetValue(node.Id, out IEnumerable<int> imageIds) == false)
+            {
+                return null;
+            }
 
             using (var context = _contextFactory.EnsureUmbracoContext())
             {
-                return contentMap.Keys
+                var images = imageIds
+                    .Select(context.UmbracoContext.Media.GetById)
+                    .Where(x => x != null);
+
+                if (images.Any() == false)
+                {
+                    return null;
+                }
+
+                var urlElement = new XElement(Namespace + "url");
+
+                urlElement.AddChild("loc", node.Url(culture: culture.Name, mode: UrlMode.Absolute));
+
+                foreach (var image in images)
+                {
+                    urlElement.Add(BuildMetaElement(image, culture));
+                }
+
+                return urlElement;
+            }
+        }
+
+        public override XElement BuildMetaElement(IPublishedContent node, CultureInfo culture)
+        {
+            var imageElement = new XElement(_xmlns + "image");
+
+            imageElement.AddChild("loc", node.Url(mode: UrlMode.Absolute));
+
+            return imageElement;
+        }
+
+        public override IEnumerable<IPublishedContent> GetContentItems(IPublishedContent node)
+        {
+            _contentMap = _imageRepository.GetDescendants(node.Id);
+
+            using (var context = _contextFactory.EnsureUmbracoContext())
+            {
+                return _contentMap.Keys
                     .Select(context.UmbracoContext.Content.GetById)
                     .Where(x => x != null);
             }
