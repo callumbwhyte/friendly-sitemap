@@ -9,6 +9,9 @@ using Umbraco.Web.Mvc;
 
 namespace Our.Umbraco.FriendlySitemap.Controllers
 {
+#if !DEBUG
+    [OutputCache(Duration = 900, VaryByCustom = "url", VaryByParam = "*")]
+#endif
     public class SitemapController : RenderMvcController
     {
         private readonly SitemapCollection _sitemapCollection;
