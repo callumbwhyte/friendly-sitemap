@@ -79,6 +79,34 @@ namespace Our.Umbraco.FriendlySitemap.Images.Builders
 
             imageElement.AddChild("loc", node.Url(mode: UrlMode.Absolute));
 
+            var title = node.Value<string>(_config.Fields.Title);
+
+            if (string.IsNullOrWhiteSpace(title) == false)
+            {
+                imageElement.AddChild("title", title);
+            }
+
+            var caption = node.Value<string>(_config.Fields.Caption);
+
+            if (string.IsNullOrWhiteSpace(caption) == false)
+            {
+                imageElement.AddChild("caption", caption);
+            }
+
+            var geoLocation = node.Value<string>(_config.Fields.GeoLocation);
+
+            if (string.IsNullOrWhiteSpace(geoLocation) == false)
+            {
+                imageElement.AddChild("geo_location", geoLocation);
+            }
+
+            var license = node.Value<string>(_config.Fields.License);
+
+            if (string.IsNullOrWhiteSpace(license) == false)
+            {
+                imageElement.AddChild("license", license);
+            }
+
             return imageElement;
         }
 

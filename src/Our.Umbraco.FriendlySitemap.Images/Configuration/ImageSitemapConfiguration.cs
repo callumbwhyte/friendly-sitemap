@@ -9,6 +9,8 @@ namespace Our.Umbraco.FriendlySitemap.Images.Configuration
 
         public string[] MediaTypes { get; set; } = new[] { "image" };
 
+        public ImageSitemapFields Fields { get; set; } = ImageSitemapFields.Create();
+
         public static ImageSitemapConfiguration Create()
         {
             var config = new ImageSitemapConfiguration();
