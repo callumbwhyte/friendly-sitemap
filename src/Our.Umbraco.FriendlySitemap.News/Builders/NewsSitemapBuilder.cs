@@ -24,7 +24,7 @@ namespace Our.Umbraco.FriendlySitemap.News.Builders
             _config = config;
         }
 
-        public override XElement BuildUrlSetElement(IPublishedContent node, CultureInfo culture)
+        public override XElement BuildUrlSetElement(IPublishedContent node, string culture)
         {
             var urlsetElement = base.BuildUrlSetElement(node, culture);
 
@@ -33,24 +33,26 @@ namespace Our.Umbraco.FriendlySitemap.News.Builders
             return urlsetElement;
         }
 
-        public override XElement BuildMetaElement(IPublishedContent node, CultureInfo culture)
+        public override XElement BuildMetaElement(IPublishedContent node, string culture)
         {
             var newsElement = new XElement(_xmlns + "news");
 
-            var title = node.Value<string>(_config.Fields.Title, culture.Name)
-                ?? node.Name(culture.Name);
+            var title = node.Value<string>(_config.Fields.Title, culture)
+                ?? node.Name(culture);
 
             if (string.IsNullOrWhiteSpace(title) == false)
             {
                 newsElement.AddChild("title", title);
             }
 
+            var cultureInfo = new CultureInfo(culture);
+
             newsElement.AddChild("publication", x => x
                 .AddChild("name", _config.PublicationName)
-                .AddChild("language", culture.TwoLetterISOLanguageName)
+                .AddChild("language", cultureInfo.TwoLetterISOLanguageName)
             );
 
-            var publicationDate = node.Value<DateTime?>(_config.Fields.Date, culture.Name)
+            var publicationDate = node.Value<DateTime?>(_config.Fields.Date, culture)
                 ?? node.CreateDate;
 
             if (publicationDate > DateTime.MinValue)
@@ -58,14 +60,14 @@ namespace Our.Umbraco.FriendlySitemap.News.Builders
                 newsElement.AddChild("publication_date", publicationDate.ToString("yyyy-MM-dd hh:mm:ss"));
             }
 
-            var genres = node.Value<IEnumerable<string>>(_config.Fields.Genres, culture.Name);
+            var genres = node.Value<IEnumerable<string>>(_config.Fields.Genres, culture);
 
             if (genres != null && genres.Any() == true)
             {
                 newsElement.AddChild("genres", string.Join(",", genres));
             }
 
-            var keywords = node.Value<IEnumerable<string>>(_config.Fields.Keywords, culture.Name);
+            var keywords = node.Value<IEnumerable<string>>(_config.Fields.Keywords, culture);
 
             if (keywords != null && keywords.Any() == true)
             {
@@ -75,10 +77,9 @@ namespace Our.Umbraco.FriendlySitemap.News.Builders
             return newsElement;
         }
 
-        public override IEnumerable<IPublishedContent> GetContentItems(IPublishedContent node)
+        public override IEnumerable<IPublishedContent> GetContentItems(IPublishedContent node, string culture)
         {
-            return node
-                .DescendantsOfType(_config.ContentTypes)
+            return node.DescendantsOfType(_config.ContentTypes, culture)
                 .Where(x => x.HasTemplate() == true);
         }
     }

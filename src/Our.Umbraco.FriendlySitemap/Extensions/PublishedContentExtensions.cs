@@ -7,9 +7,9 @@ namespace Our.Umbraco.FriendlySitemap.Extensions
 {
     public static class PublishedContentExtensions
     {
-        public static IEnumerable<IPublishedContent> DescendantsOfType(this IPublishedContent content, string[] contentTypes)
+        public static IEnumerable<IPublishedContent> DescendantsOfType(this IPublishedContent content, string[] contentTypes, string culture = null)
         {
-            return contentTypes.SelectMany(x => content.DescendantsOfType(x));
+            return contentTypes.SelectMany(x => content.DescendantsOfType(x, culture));
         }
 
         public static bool HasTemplate(this IPublishedContent content)

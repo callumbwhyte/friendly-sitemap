@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
 using Our.Umbraco.FriendlySitemap.Configuration;
@@ -23,7 +22,7 @@ namespace Our.Umbraco.FriendlySitemap.Builders
             _config = config;
         }
 
-        public override XElement BuildUrlSetElement(IPublishedContent node, CultureInfo culture)
+        public override XElement BuildUrlSetElement(IPublishedContent node, string culture)
         {
             var urlsetElement = base.BuildUrlSetElement(node, culture);
 
@@ -32,13 +31,13 @@ namespace Our.Umbraco.FriendlySitemap.Builders
             return urlsetElement;
         }
 
-        public override XElement BuildUrlElement(IPublishedContent node, CultureInfo culture)
+        public override XElement BuildUrlElement(IPublishedContent node, string culture)
         {
             var urlElement = base.BuildUrlElement(node, culture);
 
             var variants = node.Cultures.Values
                 .Where(x => x.Culture.IsNullOrWhiteSpace() == false)
-                .Where(x => x.Culture.InvariantEquals(culture.Name) == false);
+                .Where(x => x.Culture.InvariantEquals(culture) == false);
 
             foreach (var variant in variants)
             {
@@ -53,7 +52,7 @@ namespace Our.Umbraco.FriendlySitemap.Builders
                 urlElement.Add(linkElement);
             }
 
-            var lastModified = node.Value<DateTime?>(_config.Fields.LastModified, culture.Name)
+            var lastModified = node.Value<DateTime?>(_config.Fields.LastModified, culture)
                 ?? node.UpdateDate;
 
             if (lastModified > DateTime.MinValue)
@@ -61,14 +60,14 @@ namespace Our.Umbraco.FriendlySitemap.Builders
                 urlElement.AddChild("lastmod", lastModified.ToString("yyyy-MM-dd"));
             }
 
-            var changeFrequency = node.Value<string>(_config.Fields.ChangeFrequency, culture.Name);
+            var changeFrequency = node.Value<string>(_config.Fields.ChangeFrequency, culture);
 
             if (string.IsNullOrWhiteSpace(changeFrequency) == false)
             {
                 urlElement.AddChild("changefreq", changeFrequency.ToLower());
             }
 
-            var priority = node.Value<decimal>(_config.Fields.Priority, culture.Name);
+            var priority = node.Value<decimal>(_config.Fields.Priority, culture);
 
             if (priority > 0)
             {
@@ -78,9 +77,9 @@ namespace Our.Umbraco.FriendlySitemap.Builders
             return urlElement;
         }
 
-        public override IEnumerable<IPublishedContent> GetContentItems(IPublishedContent node)
+        public override IEnumerable<IPublishedContent> GetContentItems(IPublishedContent node, string culture)
         {
-            return base.GetContentItems(node)
+            return base.GetContentItems(node, culture)
                 .Where(x => x.Value<bool>(_config.Fields.Exclude) == false);
         }
     }

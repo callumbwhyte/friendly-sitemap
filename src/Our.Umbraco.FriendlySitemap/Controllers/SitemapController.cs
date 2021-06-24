@@ -39,7 +39,7 @@ namespace Our.Umbraco.FriendlySitemap.Controllers
                 return HttpNotFound();
             }
 
-            var culture = request?.Culture;
+            var culture = request?.Culture.Name;
 
             if (culture == null)
             {

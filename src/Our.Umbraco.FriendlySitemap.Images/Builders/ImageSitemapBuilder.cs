@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
 using Our.Umbraco.FriendlySitemap.Builders;
@@ -32,7 +31,7 @@ namespace Our.Umbraco.FriendlySitemap.Images.Builders
             _config = config;
         }
 
-        public override XElement BuildUrlSetElement(IPublishedContent node, CultureInfo culture)
+        public override XElement BuildUrlSetElement(IPublishedContent node, string culture)
         {
             var urlsetElement = base.BuildUrlSetElement(node, culture);
 
@@ -41,7 +40,7 @@ namespace Our.Umbraco.FriendlySitemap.Images.Builders
             return urlsetElement;
         }
 
-        public override XElement BuildUrlElement(IPublishedContent node, CultureInfo culture)
+        public override XElement BuildUrlElement(IPublishedContent node, string culture)
         {
             if (_contentMap.TryGetValue(node.Id, out IEnumerable<int> imageIds) == false)
             {
@@ -62,7 +61,7 @@ namespace Our.Umbraco.FriendlySitemap.Images.Builders
 
                 var urlElement = new XElement(Namespace + "url");
 
-                urlElement.AddChild("loc", node.Url(culture: culture.Name, mode: UrlMode.Absolute));
+                urlElement.AddChild("loc", node.Url(culture: culture, mode: UrlMode.Absolute));
 
                 foreach (var image in images)
                 {
@@ -73,7 +72,7 @@ namespace Our.Umbraco.FriendlySitemap.Images.Builders
             }
         }
 
-        public override XElement BuildMetaElement(IPublishedContent node, CultureInfo culture)
+        public override XElement BuildMetaElement(IPublishedContent node, string culture)
         {
             var imageElement = new XElement(_xmlns + "image");
 
@@ -110,7 +109,7 @@ namespace Our.Umbraco.FriendlySitemap.Images.Builders
             return imageElement;
         }
 
-        public override IEnumerable<IPublishedContent> GetContentItems(IPublishedContent node)
+        public override IEnumerable<IPublishedContent> GetContentItems(IPublishedContent node, string culture)
         {
             _contentMap = _imageRepository.GetDescendants(node.Id);
 

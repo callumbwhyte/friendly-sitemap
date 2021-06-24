@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
 using Our.Umbraco.FriendlySitemap.Configuration;
@@ -20,14 +19,14 @@ namespace Our.Umbraco.FriendlySitemap.Builders
 
         protected virtual XNamespace Namespace => XNamespace.Get("http://www.sitemaps.org/schemas/sitemap/0.9");
 
-        public virtual XDocument BuildSitemap(IPublishedContent node, CultureInfo culture)
+        public virtual XDocument BuildSitemap(IPublishedContent node, string culture)
         {
             if (_config.IsEnabled == false)
             {
                 return null;
             }
 
-            var nodes = GetContentItems(node);
+            var nodes = GetContentItems(node, culture);
 
             var urlsetElement = BuildUrlSetElement(node, culture);
 
@@ -38,16 +37,16 @@ namespace Our.Umbraco.FriendlySitemap.Builders
             return doc;
         }
 
-        public virtual XElement BuildUrlSetElement(IPublishedContent node, CultureInfo culture)
+        public virtual XElement BuildUrlSetElement(IPublishedContent node, string culture)
         {
             return new XElement(Namespace + "urlset");
         }
 
-        public virtual XElement BuildUrlElement(IPublishedContent node, CultureInfo culture)
+        public virtual XElement BuildUrlElement(IPublishedContent node, string culture)
         {
             var urlElement = new XElement(Namespace + "url");
 
-            urlElement.AddChild("loc", node.Url(culture: culture.Name, mode: UrlMode.Absolute));
+            urlElement.AddChild("loc", node.Url(culture: culture, mode: UrlMode.Absolute));
 
             var metaElement = BuildMetaElement(node, culture);
 
@@ -59,12 +58,11 @@ namespace Our.Umbraco.FriendlySitemap.Builders
             return urlElement;
         }
 
-        public virtual XElement BuildMetaElement(IPublishedContent node, CultureInfo culture) => null;
+        public virtual XElement BuildMetaElement(IPublishedContent node, string culture) => null;
 
-        public virtual IEnumerable<IPublishedContent> GetContentItems(IPublishedContent node)
+        public virtual IEnumerable<IPublishedContent> GetContentItems(IPublishedContent node, string culture)
         {
-            return node
-                .DescendantsOrSelf()
+            return node.DescendantsOrSelf(culture)
                 .Where(x => x.HasTemplate() == true);
         }
     }
