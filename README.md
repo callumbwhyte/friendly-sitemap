@@ -100,6 +100,8 @@ The package logo uses the [Sitemap](https://thenounproject.com/term/search/27117
 * [Karl Tynan](https://github.com/karltynan)
 * [Imran Haider](https://github.com/imranhaidercogworks)
 * [Aaron Sadler](https://github.com/AaronSadlerUK)
+* [Nik Rimington](https://github.com/NikRimington)
+* [Jason Elkin](https://github.com/JasonElkin)
 
 ## License
 
