@@ -93,7 +93,11 @@ This project is maintained by [Callum Whyte](https://callumwhyte.com/) and contr
 
 ## Credits
 
-The package logo uses the [Sitemap](https://thenounproject.com/term/search/2711731/) icon from the [Noun Project](https://thenounproject.com) by [Adrien Coquet](https://thenounproject.com/coquet_adrien/), licensed under [CC BY 3.0 US](https://creativecommons.org/licenses/by/3.0/us/).
+The Friendly Sitemap logo uses the [Sitemap](https://thenounproject.com/term/sitemap/2711731/) icon from the [Noun Project](https://thenounproject.com) by [Adrien Coquet](https://thenounproject.com/coquet_adrien/), licensed under [CC BY 3.0 US](https://creativecommons.org/licenses/by/3.0/us/).
+
+The Image Sitemap logo uses the [Images](https://thenounproject.com/term/images/225394/) icon from the [Noun Project](https://thenounproject.com) by [Javi Ayala](https://thenounproject.com/javi_al/), licensed under [CC BY 3.0 US](https://creativecommons.org/licenses/by/3.0/us/).
+
+The News Sitemap logo uses the [News](https://thenounproject.com/term/news/1901962/) icon from the [Noun Project](https://thenounproject.com) by [Shashank Singh](https://thenounproject.com/rshashank19/), licensed under [CC BY 3.0 US](https://creativecommons.org/licenses/by/3.0/us/).
 
 ### A special #h5yr to our contributors
 
