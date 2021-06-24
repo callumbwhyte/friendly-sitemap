@@ -3,15 +3,15 @@
     <TargetFramework>net472</TargetFramework>
     <Version Condition="'$(BUILD_BUILDNUMBER)' == ''">1.0.0.0</Version>
     <Version Condition="'$(BUILD_BUILDNUMBER)' != ''">$(BUILD_BUILDNUMBER)</Version>
-    <Description>A friendly tool for creating dynamic sitemap.xml files in Umbraco 8</Description>
+    <Description>A friendly tool for creating dynamic sitemap.xml files in Umbraco</Description>
     <Authors>Callum Whyte</Authors>
-    <Copyright>Copyright © 2020 Callum Whyte, and other contributors</Copyright>
+    <Copyright>Copyright © 2021 Callum Whyte, and other contributors</Copyright>
     <PackageLicenseUrl>https://github.com/callumbwhyte/friendly-sitemap/blob/main/LICENSE.md</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/callumbwhyte/friendly-sitemap</PackageProjectUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/callumbwhyte/friendly-sitemap/main/docs/img/logo.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/callumbwhyte/friendly-sitemap</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <PackageTags>umbraco xml sitemap seo</PackageTags>
+    <PackageTags>umbraco xml sitemap google seo</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>

@@ -3,7 +3,7 @@
     <TargetFramework>net472</TargetFramework>
     <Version Condition="'$(BUILD_BUILDNUMBER)' == ''">1.0.0.0</Version>
     <Version Condition="'$(BUILD_BUILDNUMBER)' != ''">$(BUILD_BUILDNUMBER)</Version>
-    <Description>A friendly tool for creating dynamic Google Images sitemap.xml files in Umbraco 8</Description>
+    <Description>A friendly tool for creating dynamic Google Images sitemaps in Umbraco</Description>
     <Authors>Callum Whyte</Authors>
     <Copyright>Copyright © 2021 Callum Whyte, and other contributors</Copyright>
     <PackageLicenseUrl>https://github.com/callumbwhyte/friendly-sitemap/blob/main/LICENSE.md</PackageLicenseUrl>
