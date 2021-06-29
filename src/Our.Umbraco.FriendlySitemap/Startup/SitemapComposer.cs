@@ -12,7 +12,7 @@ namespace Our.Umbraco.FriendlySitemap.Startup
         {
             composition.Components().Append<SitemapComponent>();
 
-            composition.Register(factory => SitemapConfiguration.Create());
+            composition.Register(factory => SitemapConfiguration.Create(), Lifetime.Singleton);
 
             composition.RegisterSitemap<SitemapBuilder>("sitemap.xml");
         }
