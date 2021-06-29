@@ -1,18 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Our.Umbraco.Extensions.Composing;
 using Our.Umbraco.FriendlySitemap.Builders;
-using Umbraco.Core.Composing;
 
 namespace Our.Umbraco.FriendlySitemap.Composing
 {
-    public class SitemapCollection : Dictionary<string, ISitemapBuilder>, IBuilderCollection<ISitemapBuilder>
+    public class SitemapCollection : LazyKeyValueCollection<ISitemapBuilder>
     {
-        public SitemapCollection(IDictionary<string, ISitemapBuilder> collection)
+        private IDictionary<string, Lazy<ISitemapBuilder>> _collection;
+
+        public SitemapCollection(IDictionary<string, Lazy<ISitemapBuilder>> collection)
             : base(collection)
         {
-
+            _collection = collection;
         }
 
-        IEnumerator<ISitemapBuilder> IEnumerable<ISitemapBuilder>.GetEnumerator()
-            => this.Values.GetEnumerator();
+        public IEnumerable<string> Paths => _collection.Keys;
     }
 }

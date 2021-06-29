@@ -19,6 +19,7 @@
     <Content Include="web.config.Uninstall.xdt" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Our.Umbraco.Extensions.Composing" Version="1.0.0" />
     <PackageReference Include="Our.Umbraco.Extensions.Routing" Version="1.0.0" />
     <PackageReference Include="UmbracoCms.Web" Version="8.1.0" />
   </ItemGroup>

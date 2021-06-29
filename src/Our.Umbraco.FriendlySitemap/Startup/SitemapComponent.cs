@@ -20,7 +20,7 @@ namespace Our.Umbraco.FriendlySitemap.Startup
 
         public void Initialize()
         {
-            foreach (var path in _sitemapCollection.Keys)
+            foreach (var path in _sitemapCollection.Paths)
             {
                 var values = new
                 {
