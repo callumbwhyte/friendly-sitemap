@@ -12,7 +12,7 @@ using Umbraco.Web;
 
 namespace Our.Umbraco.FriendlySitemap.News.Builders
 {
-    internal class NewsSitemapBuilder : SitemapBuilderBase<NewsSitemapConfiguration>
+    public class NewsSitemapBuilder : SitemapBuilderBase<NewsSitemapConfiguration>
     {
         private readonly XNamespace _xmlns = XNamespace.Get("http://www.google.com/schemas/sitemap-news/0.9");
 

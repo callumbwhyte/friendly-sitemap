@@ -12,7 +12,7 @@ using Umbraco.Web;
 
 namespace Our.Umbraco.FriendlySitemap.Images.Builders
 {
-    internal class ImageSitemapBuilder : SitemapBuilderBase<ImageSitemapConfiguration>
+    public class ImageSitemapBuilder : SitemapBuilderBase<ImageSitemapConfiguration>
     {
         private readonly XNamespace _xmlns = XNamespace.Get("http://www.google.com/schemas/sitemap-image/1.1");
 

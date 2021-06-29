@@ -10,7 +10,7 @@ using Umbraco.Web;
 
 namespace Our.Umbraco.FriendlySitemap.Builders
 {
-    internal class SitemapBuilder : SitemapBuilderBase<SitemapConfiguration>
+    public class SitemapBuilder : SitemapBuilderBase<SitemapConfiguration>
     {
         private readonly XNamespace _xmlns = XNamespace.Get("http://www.w3.org/1999/xhtml");
 
