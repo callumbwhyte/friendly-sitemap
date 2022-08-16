@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Xml.Linq;
 using Our.Umbraco.FriendlySitemap.Configuration;
@@ -62,8 +63,16 @@ namespace Our.Umbraco.FriendlySitemap.Builders
 
         public virtual IEnumerable<IPublishedContent> GetContentItems(IPublishedContent node, string culture)
         {
+          
             return node.DescendantsOrSelf(culture)
-                .Where(x => x.HasTemplate() == true);
+                .Where(x => x.HasTemplate() == true && !InExcludeDoctypeList(x.ContentType.Alias));
+        }
+
+        private bool InExcludeDoctypeList(string contentTypeAlias)
+        {
+
+
+            return _config.ExcludeList?.ToList().Contains(contentTypeAlias)??false;
         }
     }
 }
