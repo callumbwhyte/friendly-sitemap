@@ -31,5 +31,7 @@ namespace Our.Umbraco.FriendlySitemap.Helpers
 
             setValue(property);
         }
+
+        
     }
 }

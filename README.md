@@ -40,6 +40,12 @@ Once installed the sitemap must be enabled via an app setting in the `web.config
 <add key="Umbraco.Sitemap.Enable" value="true" />
 ```
 
+To exclude certain document types from the sitemap 
+```
+<add key="Umbraco.Sitemap.Exclude" value="docType1,doctype2" />
+```
+
+
 The sitemap will be visible on the URL `/sitemap.xml`, such as `https://www.yoursite.com/sitemap.xml`. If installed, the [Image Sitemap](https://www.nuget.org/packages/Our.Umbraco.FriendlySitemap.Images/) will be visible on the URL `/sitemap_images.xml` while the [News Sitemap](https://www.nuget.org/packages/Our.Umbraco.FriendlySitemap.News/) will be visible on the URL `/sitemap_news.xml`.
 
 All links displayed in a sitemap are specific to the current domain and culture.
